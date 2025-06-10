@@ -3,7 +3,7 @@ Description=almostprohibited.ca backend API service
 
 [Service]
 Type=simple
-ExecStart=/bin/echo "hello world - api"
+ExecStart=/home/ubuntu/almostprohibited/backend/api
 Restart=on-failure
 RestartSec=3
 
