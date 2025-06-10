@@ -1,0 +1,9 @@
+[Unit]
+Description=almostprohibited.ca backend indexer
+
+[Service]
+Type=oneshot
+ExecStart=/bin/echo "hello world indexer"
+
+[Install]
+WantedBy=multi-user.target
