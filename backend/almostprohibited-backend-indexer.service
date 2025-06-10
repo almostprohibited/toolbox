@@ -3,7 +3,7 @@ Description=almostprohibited.ca backend indexer
 
 [Service]
 Type=oneshot
-ExecStart=/bin/echo "hello world indexer"
+ExecStart=/home/ubuntu/almostprohibited/backend/indexer
 
 [Install]
 WantedBy=multi-user.target
