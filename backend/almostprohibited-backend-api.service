@@ -6,6 +6,7 @@ Type=simple
 ExecStart={binary_path}/api
 Restart=on-failure
 RestartSec=3
+Environment="API_PORT={api_port}"
 
 [Install]
 WantedBy=multi-user.target
