@@ -1,12 +1,13 @@
 services:
   mongo:
-    image: mongo
+    image: mongo:8.0-noble
     restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
       - ./mongodb:/data/db
+      - ./mongodb-backups:/root/backups
     ports:
       - 27017:27017
     command: --wiredTigerJournalCompressor zstd --wiredTigerCollectionBlockCompressor zstd
