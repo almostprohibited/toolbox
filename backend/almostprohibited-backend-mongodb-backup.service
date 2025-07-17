@@ -1,0 +1,10 @@
+[Unit]
+Description=almostprohibited.ca mongodb backups
+
+[Service]
+Type=oneshot
+WorkingDirectory={binary_path}
+ExecStart={binary_path}/mongodb-backup.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -7,7 +7,6 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
       - ./mongodb:/data/db
-      - ./mongodb-backups:/root/backups
     ports:
       - 27017:27017
     command: --wiredTigerJournalCompressor zstd --wiredTigerCollectionBlockCompressor zstd
