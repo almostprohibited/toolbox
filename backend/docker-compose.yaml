@@ -7,9 +7,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
       - ./mongodb:/data/db
-    ports:
-      - 27017:27017
     command: --wiredTigerJournalCompressor zstd --wiredTigerCollectionBlockCompressor zstd
+    network_mode: host
 
   mongo-express:
     image: mongo-express
@@ -19,8 +18,9 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
+      ME_CONFIG_MONGODB_URL: mongodb://root:root@localhost:27017/
       ME_CONFIG_BASICAUTH: false
       # ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
     volumes:
       - ./mongodb:/data/db
+    network_mode: host
