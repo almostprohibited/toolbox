@@ -1,0 +1,8 @@
+services:
+  backend-beta:
+    image: ghcr.io/almostprohibited/backend:beta
+    restart: unless-stopped
+    environment:
+      API_PORT: 4002
+    ports:
+      - 4002:4002
