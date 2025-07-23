@@ -6,3 +6,4 @@ services:
       API_PORT: 4002
     ports:
       - 4002:4002
+    network_mode: bridge

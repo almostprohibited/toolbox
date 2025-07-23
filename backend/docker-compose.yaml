@@ -10,6 +10,7 @@ services:
     ports:
       - 27017:27017
     command: --wiredTigerJournalCompressor zstd --wiredTigerCollectionBlockCompressor zstd
+    network_mode: bridge
 
   mongo-express:
     image: mongo-express
@@ -24,3 +25,4 @@ services:
       # ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
     volumes:
       - ./mongodb:/data/db
+    network_mode: bridge
