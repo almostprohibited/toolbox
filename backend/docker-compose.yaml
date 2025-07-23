@@ -23,6 +23,8 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://root:root@localhost:27017/
       ME_CONFIG_BASICAUTH: false
       # ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+    ports:
+      - 27017:27017
     volumes:
       - ./mongodb:/data/db
     network_mode: bridge
