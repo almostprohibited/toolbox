@@ -1,20 +1,17 @@
-FROM arm64v8/alpine:latest
-
+FROM arm64v8/alpine:latest as backend
+ARG API_BINARY_NAME
+ARG INDEXER_BINARY_NAME
 LABEL org.opencontainers.image.source=https://github.com/almostprohibited/backend
-
-ARG API_BINARY_NAME
-RUN test -n "$API_BINARY_NAME" || (echo "Missing --build-arg API_BINARY_NAME" && false)
-
-ARG INDEXER_BINARY_NAME
-RUN test -n "$INDEXER_BINARY_NAME" || (echo "Missing --build-arg INDEXER_BINARY_NAME" && false)
-
-ARG API_BINARY_NAME
+RUN test -n "$API_BINARY_NAME" || (echo "Missing --build-arg API_BINARY_NAME" && false) && \
+	test -n "$INDEXER_BINARY_NAME" || (echo "Missing --build-arg INDEXER_BINARY_NAME" && false)
 COPY $API_BINARY_NAME /bin/almostprohibited-api
+RUN chmod +x /bin/almostprohibited-api
 
-ARG INDEXER_BINARY_NAME
+FROM backend as release
 COPY $INDEXER_BINARY_NAME /bin/almostprohibited-indexer
+# Alpine defaults to UTC, 7am UTC is 12am PST
+RUN chmod +x /bin/almostprohibited-indexer && \
+	echo "7 0 * * * /bin/almostprohibited-indexer" >> /var/spool/cron/crontabs/root
 
-RUN chmod +x /bin/almostprohibited-api && \
-	chmod +x /bin/almostprohibited-indexer
-
+FROM backend
 CMD ["/bin/almostprohibited-api"]
