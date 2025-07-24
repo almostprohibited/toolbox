@@ -1,5 +1,6 @@
 services:
   mongo:
+    container_name: almostprohibited-mongodb
     image: mongo:8.0-noble
     restart: unless-stopped
     environment:
@@ -9,8 +10,8 @@ services:
       - ./mongodb:/data/db
     command: --wiredTigerJournalCompressor zstd --wiredTigerCollectionBlockCompressor zstd
     network_mode: host
-
   mongo-express:
+    container_name: almostprohibited-mongodb-express
     image: mongo-express
     restart: unless-stopped
     ports:
@@ -23,4 +24,18 @@ services:
       # ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
     volumes:
       - ./mongodb:/data/db
+    network_mode: host
+  backend-beta:
+    container_name: almostprohibited-backend-beta
+    image: ghcr.io/almostprohibited/backend:beta
+    restart: unless-stopped
+    environment:
+      API_PORT: 4001
+    network_mode: host
+  backend-release:
+    container_name: almostprohibited-backend-release
+    image: ghcr.io/almostprohibited/backend:release
+    restart: unless-stopped
+    environment:
+      API_PORT: 3001
     network_mode: host

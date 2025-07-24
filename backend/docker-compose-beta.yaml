@@ -1,8 +1,0 @@
-services:
-  backend-beta:
-    container_name: backend-beta
-    image: ghcr.io/almostprohibited/backend:beta
-    restart: unless-stopped
-    environment:
-      API_PORT: 4001
-    network_mode: host
