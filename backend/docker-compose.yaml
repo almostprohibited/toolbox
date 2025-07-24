@@ -7,7 +7,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
-      - ./mongodb:/data/db
+      - /home/ubuntu/almostprohibited/backend/mongodb:/data/db
     command: --wiredTigerJournalCompressor zstd --wiredTigerCollectionBlockCompressor zstd
     network_mode: host
   mongo-express:
@@ -23,7 +23,7 @@ services:
       ME_CONFIG_BASICAUTH: false
       # ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
     volumes:
-      - ./mongodb:/data/db
+      - /home/ubuntu/almostprohibited/backend/mongodb:/data/db
     network_mode: host
   backend-beta:
     container_name: almostprohibited-backend-beta
