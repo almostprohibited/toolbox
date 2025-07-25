@@ -1,9 +1,0 @@
-[Unit]
-Description=almostprohibited.ca backend indexer
-
-[Service]
-Type=oneshot
-ExecStart={binary_path}/indexer
-
-[Install]
-WantedBy=multi-user.target
