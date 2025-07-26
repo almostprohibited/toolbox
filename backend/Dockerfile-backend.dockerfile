@@ -12,7 +12,7 @@ COPY $INDEXER_BINARY_NAME /bin/almostprohibited-indexer
 # Alpine defaults to UTC, 7am UTC is 12am PST
 RUN chmod +x /bin/almostprohibited-indexer && \
 	echo "7 0 * * * /bin/almostprohibited-indexer" >> /var/spool/cron/crontabs/root
-CMD ["/bin/almostprohibited-api"]
+CMD ["crond", "-b", "&&", "/bin/almostprohibited-api"]
 
 FROM backend
 CMD ["/bin/almostprohibited-api"]
