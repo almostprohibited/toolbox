@@ -12,7 +12,7 @@ COPY $INDEXER_BINARY_NAME /bin/almostprohibited-indexer
 # Alpine defaults to UTC, 7am UTC is 12am PST
 # TODO: move entrypoint script into a script in repo, not in Dockerfile
 RUN chmod +x /bin/almostprohibited-indexer && \
-	echo "7 0 * * * /bin/almostprohibited-indexer" >> /var/spool/cron/crontabs/root && \
+	echo "10 7 * * * /bin/almostprohibited-indexer" >> /var/spool/cron/crontabs/root && \
 	echo "#!/bin/sh" >> /usr/local/bin/entrypoint.sh && \
 	echo "crond -b" >> /usr/local/bin/entrypoint.sh && \
 	echo "exec \"\$@\"" >> /usr/local/bin/entrypoint.sh && \
