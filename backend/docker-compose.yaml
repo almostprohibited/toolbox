@@ -7,9 +7,12 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
-      - /home/ubuntu/almostprohibited/backend/mongodb:/data/db
+      - ${VOLUME_PATH?error}/mongodb:/data/db
     command: --wiredTigerJournalCompressor zstd --wiredTigerCollectionBlockCompressor zstd
-    network_mode: host
+    networks:
+      - release
+      - beta
+
   mongo-express:
     container_name: almostprohibited-mongodb-express
     image: mongo-express
@@ -19,23 +22,79 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:root@localhost:27017/
+      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
       ME_CONFIG_BASICAUTH: false
       # ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
     volumes:
-      - /home/ubuntu/almostprohibited/backend/mongodb:/data/db
-    network_mode: host
+      - ${VOLUME_PATH:?error}/mongodb:/data/db
+    depends_on:
+      - mongo
+    networks:
+      - release
+
   backend-beta:
     container_name: almostprohibited-backend-beta
     image: ghcr.io/almostprohibited/backend:beta
     restart: unless-stopped
     environment:
       API_PORT: 4001
-    network_mode: host
+      MONGO_DB_HOST: "mongo"
+      MONGO_DB_PORT: "27017"
+      PROMETHEUS_HOST: "prometheus"
+      PROMETHEUS_PORT: "9090"
+    ports:
+      - 4001:4001
+    depends_on:
+      - mongo
+    networks:
+      - beta
+
   backend-release:
     container_name: almostprohibited-backend-release
     image: ghcr.io/almostprohibited/backend:release
     restart: unless-stopped
     environment:
       API_PORT: 3001
-    network_mode: host
+    ports:
+      - 3001:3001
+    depends_on:
+      - mongo
+      - prometheus
+    networks:
+      - release
+
+  prometheus:
+    container_name: almostprohibited-prometheus-release
+    image: prom/prometheus
+    restart: unless-stopped
+    user: "0"
+    command:
+      - --web.enable-otlp-receiver
+    ports:
+      - 9090:9090
+    volumes:
+      - ${VOLUME_PATH?error}/prometheus:/prometheus
+    networks:
+      - release
+
+  grafana:
+    container_name: almostprohibited-grafana-release
+    image: grafana/grafana-enterprise
+    restart: unless-stopped
+    user: "0"
+    ports:
+      - 3000:3000
+    volumes:
+      - ${VOLUME_PATH?error}/grafana:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - release
+
+networks:
+  release:
+    name: almostprohibited-network-release
+    driver: bridge
+  beta:
+    name: almostprohibited-beta-release
+    driver: bridge
