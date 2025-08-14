@@ -55,6 +55,10 @@ services:
     restart: unless-stopped
     environment:
       API_PORT: 3001
+      MONGO_DB_HOST: "mongo"
+      MONGO_DB_PORT: "27017"
+      PROMETHEUS_HOST: "prometheus"
+      PROMETHEUS_PORT: "9090"
     ports:
       - 3001:3001
     depends_on:
