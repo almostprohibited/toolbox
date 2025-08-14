@@ -73,7 +73,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - ${VOLUME_PATH?error}/prometheus:/prometheus
+      - ${VOLUME_PATH:?error}/prometheus:/prometheus
     networks:
       - release
 
@@ -85,7 +85,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ${VOLUME_PATH?error}/grafana:/var/lib/grafana
+      - ${VOLUME_PATH:?error}/grafana:/var/lib/grafana
     depends_on:
       - prometheus
     networks:
