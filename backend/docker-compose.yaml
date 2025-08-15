@@ -42,6 +42,7 @@ services:
       MONGO_DB_PORT: "27017"
       PROMETHEUS_HOST: "prometheus"
       PROMETHEUS_PORT: "9090"
+      STAGE: ${STAGE}
     ports:
       - 4001:4001
     depends_on:
@@ -59,6 +60,7 @@ services:
       MONGO_DB_PORT: "27017"
       PROMETHEUS_HOST: "prometheus"
       PROMETHEUS_PORT: "9090"
+      STAGE: ${STAGE}
     ports:
       - 3001:3001
     depends_on:
