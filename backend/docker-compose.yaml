@@ -78,6 +78,7 @@ services:
     user: "0"
     command:
       - --web.enable-otlp-receiver
+      - --web.enable-admin-api
     ports:
       - 9090:9090
     volumes:
