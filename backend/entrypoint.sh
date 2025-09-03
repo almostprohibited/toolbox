@@ -9,4 +9,4 @@ echo "0 6 * * * /bin/almostprohibited-indexer --retailers prophet-river" >> /var
 
 crond -b
 
-exec "\$@"
+exec "$@"
