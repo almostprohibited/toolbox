@@ -45,6 +45,7 @@ services:
       PROMETHEUS_HOST: "prometheus"
       PROMETHEUS_PORT: "9090"
       STAGE: ${STAGE}
+      DISCORD_CONTACT_WEBHOOK_URL: ${DISCORD_CONTACT_WEBHOOK_URL?error}
     ports:
       - 4001:4001
     depends_on:
@@ -63,6 +64,8 @@ services:
       PROMETHEUS_HOST: "prometheus"
       PROMETHEUS_PORT: "9090"
       STAGE: ${STAGE}
+      DISCORD_CONTACT_WEBHOOK_URL: ${DISCORD_CONTACT_WEBHOOK_URL?error}
+      DISCORD_INDEXER_WEBHOOK_URL: ${DISCORD_INDEXER_WEBHOOK_URL?error}
     ports:
       - 3001:3001
     depends_on:
