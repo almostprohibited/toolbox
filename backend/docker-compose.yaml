@@ -84,6 +84,7 @@ services:
     command:
       - --web.enable-otlp-receiver
       - --web.enable-admin-api
+      - "--storage.tsdb.retention.time=90d"
     ports:
       - 9090:9090
     volumes:
