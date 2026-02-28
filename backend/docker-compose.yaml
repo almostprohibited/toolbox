@@ -54,6 +54,7 @@ services:
       - mongo
     networks:
       - beta
+      - proxy
 
   backend-release:
     container_name: almostprohibited-backend-release
@@ -77,6 +78,7 @@ services:
       - prometheus
     networks:
       - release
+      - proxy
 
   prometheus:
     container_name: almostprohibited-prometheus-release
@@ -114,4 +116,7 @@ networks:
     driver: bridge
   beta:
     name: almostprohibited-beta-release
+    driver: bridge
+  proxy:
+    name: almostprohibited-network-proxy
     driver: bridge
