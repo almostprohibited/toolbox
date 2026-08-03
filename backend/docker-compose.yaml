@@ -45,6 +45,7 @@ services:
       PROMETHEUS_HOST: "prometheus"
       PROMETHEUS_PORT: "9090"
       STAGE: ${STAGE}
+      PRIVATE_KEY: ${PRIVATE_KEY}
     env_file:
       - ${VOLUME_PATH?error}/.env.beta
     ports:
@@ -66,6 +67,7 @@ services:
       PROMETHEUS_HOST: "prometheus"
       PROMETHEUS_PORT: "9090"
       STAGE: ${STAGE}
+      PRIVATE_KEY: ${PRIVATE_KEY}
     env_file:
       - ${VOLUME_PATH?error}/.env.release
     ports:
