@@ -79,6 +79,26 @@ services:
       - release
       - proxy
 
+  backend-indexer-release:
+    container_name: almostprohibited-backend-indexer-release
+    image: ghcr.io/almostprohibited/backend-indexer:release
+    restart: unless-stopped
+    environment:
+      MONGO_DB_HOST: "mongo"
+      MONGO_DB_PORT: "27017"
+      PROMETHEUS_HOST: "prometheus"
+      PROMETHEUS_PORT: "9090"
+      STAGE: ${STAGE}
+      PRIVATE_KEY: ${PRIVATE_KEY}
+    env_file:
+      - ${VOLUME_PATH?error}/.env.release
+    depends_on:
+      - mongo
+      - prometheus
+    networks:
+      - release
+      - proxy
+
   prometheus:
     container_name: almostprohibited-prometheus-release
     image: prom/prometheus
