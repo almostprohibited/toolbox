@@ -58,7 +58,7 @@ services:
 
   backend-release:
     container_name: almostprohibited-backend-release
-    image: ghcr.io/almostprohibited/backend:release
+    image: ghcr.io/almostprohibited/backend-web:release
     restart: unless-stopped
     environment:
       API_PORT: 3001
