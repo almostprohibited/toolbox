@@ -1,12 +1,8 @@
 #!/bin/sh
 
-chmod +x /bin/almostprohibited-indexer
+set -e
 
-# Alpine defaults to UTC, 7am UTC is 12am PST
-echo "0 7 * * * /bin/almostprohibited-indexer -e prophet-river -e canadas-gun-store -e bullseye-north -e the-gun-dealer" >> /var/spool/cron/crontabs/root
-echo "30 6 * * * /bin/almostprohibited-indexer -r prophet-river" >> /var/spool/cron/crontabs/root
-echo "30 7 * * * /bin/almostprohibited-indexer -r bullseye-north -r canadas-gun-store -r the-gun-dealer" >> /var/spool/cron/crontabs/root
-
-crond -b
+export -p > /root/env.sh
+chmod 600 /root/env.sh
 
 exec "$@"
