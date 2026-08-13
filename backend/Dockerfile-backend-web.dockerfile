@@ -1,4 +1,4 @@
-FROM debian:trixie-slim
+FROM ubuntu:26.04
 
 LABEL org.opencontainers.image.source=https://github.com/almostprohibited/backend
 
