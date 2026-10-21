@@ -8,6 +8,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+      GLIBC_TUNABLES: glibc.pthread.rseq=1
     volumes:
       - ${VOLUME_PATH?error}/mongodb:/data/db
     command: --wiredTigerJournalCompressor zstd --wiredTigerCollectionBlockCompressor zstd
