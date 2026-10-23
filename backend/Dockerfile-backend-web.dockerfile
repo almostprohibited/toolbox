@@ -10,4 +10,4 @@ RUN test -n "$API_BINARY_NAME" || (echo "Missing --build-arg API_BINARY_NAME" &&
 COPY $API_BINARY_NAME /bin/almostprohibited-api
 RUN chmod +x /bin/almostprohibited-api
 
-CMD ["/bin/almostprohibited-api"]
+CMD ["xvfb-run", "-a", "-s", "-screen 0 1680x1050x24", "/bin/almostprohibited-api"]
