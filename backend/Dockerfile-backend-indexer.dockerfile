@@ -2,7 +2,7 @@ FROM ubuntu:26.04
 
 LABEL org.opencontainers.image.source=https://github.com/almostprohibited/backend
 
-RUN apt update && apt install -y ca-certificates cron && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y ca-certificates cron xvfb && rm -rf /var/lib/apt/lists/*
 
 COPY entrypoint.sh /root/entrypoint.sh
 RUN chmod +x /root/entrypoint.sh
