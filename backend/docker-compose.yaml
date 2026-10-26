@@ -63,6 +63,7 @@ services:
     container_name: almostprohibited-backend-release
     image: ghcr.io/almostprohibited/backend-web:release
     restart: unless-stopped
+    init: true
     environment:
       API_PORT: 3001
       MONGO_DB_HOST: "mongo"
