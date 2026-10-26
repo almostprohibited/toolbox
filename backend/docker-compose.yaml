@@ -39,6 +39,7 @@ services:
     container_name: almostprohibited-backend-beta
     image: ghcr.io/almostprohibited/backend-web:beta
     restart: unless-stopped
+    init: true
     environment:
       API_PORT: 4001
       MONGO_DB_HOST: "mongo"
