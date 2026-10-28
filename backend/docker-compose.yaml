@@ -53,7 +53,7 @@ services:
     environment:
       TZ: America/New_York
     ports:
-      - 9222:9222
+      - 9223:9222
     networks:
       - chrome-release
 
