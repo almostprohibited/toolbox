@@ -42,7 +42,8 @@ services:
     environment:
       TZ: America/New_York
     networks:
-      - chrome-beta
+      chrome-beta:
+        ipv4_address: 10.10.0.1
 
   backend-chrome-release:
     container_name: almostprohibited-backend-chrome-release
@@ -51,7 +52,8 @@ services:
     environment:
       TZ: America/New_York
     networks:
-      - chrome-release
+      chrome-release:
+        ipv4_address: 10.20.0.1
 
   backend-beta:
     container_name: almostprohibited-backend-beta
@@ -167,6 +169,12 @@ networks:
   chrome-beta:
     name: almostprohibited-chrome-beta
     driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/24
   chrome-release:
     name: almostprohibited-chrome-release
     driver: bridge
+    ipam:
+      config:
+        - subnet: 10.20.0.0/24
