@@ -2,6 +2,6 @@ SHELL=/bin/bash
 BASH_ENV=/root/env.sh
 
 0 7 * * * root /bin/almostprohibited-indexer -e prophet-river -e canadas-gun-store -e bullseye-north -e the-gun-dealer -e parts-only
-0 7 * * * root xvfb-run -a -s "-screen 0 1680x1050x24" /bin/almostprohibited-indexer -r parts-only
+0 7 * * * root /bin/almostprohibited-indexer -r parts-only
 30 6 * * * root /bin/almostprohibited-indexer -r prophet-river
 30 7 * * * root /bin/almostprohibited-indexer -r bullseye-north -r canadas-gun-store -r the-gun-dealer

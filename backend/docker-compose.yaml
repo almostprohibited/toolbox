@@ -35,11 +35,21 @@ services:
     networks:
       - release
 
+  backend-chrome:
+    container_name: almostprohibited-backend-chrome
+    image: ghcr.io/almostprohibited/backend-chrome:latest
+    restart: unless-stopped
+    environment:
+      TZ: America/New_York
+    ports:
+      - 9222:9222
+    networks:
+      - chrome
+
   backend-beta:
     container_name: almostprohibited-backend-beta
     image: ghcr.io/almostprohibited/backend-web:beta
     restart: unless-stopped
-    init: true
     environment:
       API_PORT: 4001
       MONGO_DB_HOST: "mongo"
@@ -50,21 +60,20 @@ services:
       PRIVATE_KEY: ${PRIVATE_KEY}
     env_file:
       - ${VOLUME_PATH?error}/.env.beta
-    volumes:
-      - ${VOLUME_PATH:?error}/chrome:/mnt/chrome:ro
     ports:
       - 4001:4001
     depends_on:
       - mongo
+      - backend-chrome
     networks:
       - beta
       - proxy
+      - chrome
 
   backend-release:
     container_name: almostprohibited-backend-release
     image: ghcr.io/almostprohibited/backend-web:release
     restart: unless-stopped
-    init: true
     environment:
       API_PORT: 3001
       MONGO_DB_HOST: "mongo"
@@ -75,16 +84,16 @@ services:
       PRIVATE_KEY: ${PRIVATE_KEY}
     env_file:
       - ${VOLUME_PATH?error}/.env.release
-    volumes:
-      - ${VOLUME_PATH:?error}/chrome:/mnt/chrome:ro
     ports:
       - 3001:3001
     depends_on:
       - mongo
       - prometheus
+      - backend-chrome
     networks:
       - release
       - proxy
+      - chrome
 
   backend-indexer-release:
     container_name: almostprohibited-backend-indexer-release
@@ -104,9 +113,11 @@ services:
     depends_on:
       - mongo
       - prometheus
+      - backend-chrome
     networks:
       - release
       - proxy
+      - chrome
 
   prometheus:
     container_name: almostprohibited-prometheus-release
@@ -147,4 +158,7 @@ networks:
     driver: bridge
   proxy:
     name: almostprohibited-network-proxy
+    driver: bridge
+  chrome:
+    name: almostprohibited-chrome
     driver: bridge

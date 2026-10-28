@@ -2,7 +2,7 @@ FROM debian:trixie-slim
 
 LABEL org.opencontainers.image.source=https://github.com/almostprohibited/backend
 
-RUN apt update && apt install -y ca-certificates xvfb && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 
 ARG API_BINARY_NAME
 RUN test -n "$API_BINARY_NAME" || (echo "Missing --build-arg API_BINARY_NAME" && false)
@@ -10,4 +10,4 @@ RUN test -n "$API_BINARY_NAME" || (echo "Missing --build-arg API_BINARY_NAME" &&
 COPY $API_BINARY_NAME /bin/almostprohibited-api
 RUN chmod +x /bin/almostprohibited-api
 
-CMD ["xvfb-run", "-a", "-s", "-screen 0 1680x1050x24", "/bin/almostprohibited-api"]
+CMD ["/bin/almostprohibited-api"]
