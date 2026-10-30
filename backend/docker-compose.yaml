@@ -35,26 +35,6 @@ services:
     networks:
       - release
 
-  backend-chrome-beta:
-    container_name: almostprohibited-backend-chrome-beta
-    image: ghcr.io/almostprohibited/backend-chrome:latest
-    restart: unless-stopped
-    environment:
-      TZ: America/New_York
-    networks:
-      chrome-beta:
-        ipv4_address: 10.10.0.10
-
-  backend-chrome-release:
-    container_name: almostprohibited-backend-chrome-release
-    image: ghcr.io/almostprohibited/backend-chrome:latest
-    restart: unless-stopped
-    environment:
-      TZ: America/New_York
-    networks:
-      chrome-release:
-        ipv4_address: 10.20.0.10
-
   backend-beta:
     container_name: almostprohibited-backend-beta
     image: ghcr.io/almostprohibited/backend-web:beta
@@ -73,11 +53,9 @@ services:
       - 4001:4001
     depends_on:
       - mongo
-      - backend-chrome-beta
     networks:
       - beta
       - proxy
-      - chrome-beta
 
   backend-release:
     container_name: almostprohibited-backend-release
@@ -98,11 +76,9 @@ services:
     depends_on:
       - mongo
       - prometheus
-      - backend-chrome-release
     networks:
       - release
       - proxy
-      - chrome-release
 
   backend-indexer-release:
     container_name: almostprohibited-backend-indexer-release
@@ -120,11 +96,9 @@ services:
     depends_on:
       - mongo
       - prometheus
-      - backend-chrome-release
     networks:
       - release
       - proxy
-      - chrome-release
 
   prometheus:
     container_name: almostprohibited-prometheus-release
@@ -166,17 +140,3 @@ networks:
   proxy:
     name: almostprohibited-network-proxy
     driver: bridge
-  chrome-beta:
-    name: almostprohibited-chrome-beta
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.10.0.0/24
-          gateway: 10.10.0.1
-  chrome-release:
-    name: almostprohibited-chrome-release
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.20.0.0/24
-          gateway: 10.20.0.1
