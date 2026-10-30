@@ -28,7 +28,7 @@ RUN apt update && \
         socat && \
     rm -rf /var/lib/apt/lists/*
 
-RUN curl -L https://storage.googleapis.com/chrome-for-testing-public/154.0.8037.92/linux-arm64/chrome-linux-arm64.zip -o /tmp/chrome.zip && \
+RUN curl -L https://storage.googleapis.com/chrome-for-testing-public/154.0.8037.92/linux64/chrome-linux64.zip -o /tmp/chrome.zip && \
     unzip /tmp/chrome.zip -d /tmp/unpacked-chrome && \
     mv /tmp/unpacked-chrome/* /root/chrome && \
     rm -rf /tmp/chrome.zip /tmp/unpacked-chrome
