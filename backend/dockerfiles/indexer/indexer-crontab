@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 BASH_ENV=/root/env.sh
 
-0 7 * * * root /bin/almostprohibited-indexer -e prophet-river -e parts-only -e latulippe
-0 7 * * * root /bin/almostprohibited-indexer -r parts-only -r latulippe
+0 7 * * * root /bin/almostprohibited-indexer -e prophet-river -e latulippe
+0 7 * * * root /bin/almostprohibited-indexer -r latulippe
 30 6 * * * root /bin/almostprohibited-indexer -r prophet-river
