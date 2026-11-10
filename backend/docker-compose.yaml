@@ -142,7 +142,7 @@ networks:
     driver: bridge
   proxy:
     name: almostprohibited-network-proxy
-    driver: bridge
+    external: true
   almostprohibited-chrome:
     name: almostprohibited-chrome
     external: true
