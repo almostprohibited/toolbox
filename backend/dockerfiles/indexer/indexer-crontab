@@ -1,7 +1,6 @@
 SHELL=/bin/bash
 BASH_ENV=/root/env.sh
 
-0 7 * * * root /bin/almostprohibited-indexer -e prophet-river -e latulippe -e canadas-gun-store
+0 7 * * * root /bin/almostprohibited-indexer -e latulippe -e canadas-gun-store
 0 7 * * * root /bin/almostprohibited-indexer -r latulippe
 0 8 * * * root /bin/almostprohibited-indexer -r canadas-gun-store
-30 6 * * * root /bin/almostprohibited-indexer -r prophet-river
